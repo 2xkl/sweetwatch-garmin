@@ -1,0 +1,17 @@
+# Build outputs
+*.prg
+*.prg.debug.xml
+
+# Generated folders
+gen/
+mir/
+internal-mir/
+external-mir/
+
+# IDE
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,25 +1,25 @@
 # SweetWatch Garmin
 
-Aplikacje Garmin Connect IQ do monitorowania glukozy z SweetWatch.
+Garmin Connect IQ apps for glucose monitoring with SweetWatch.
 
-## Projekty
+## Projects
 
 ### sweetwatch-widget
-Widget wyświetlający glukozę na głównym ekranie zegarka.
-- Pokazuje: czas, glukozę, trend, datę
-- Pobiera dane co 60 sekund
+Widget displaying glucose on the watch main screen.
+- Shows: time, glucose, trend, date
+- Fetches data every 60 seconds
 
 ### sweetwatch-datafield
-Pole danych do aktywności sportowych (bieganie, rower, itp.)
-- Pokazuje: glukozę + trend
-- Background Service pobiera dane co 60 sekund
+Data field for sports activities (running, cycling, etc.)
+- Shows: glucose + trend
+- Background Service fetches data every 60 seconds
 
-## Wymagania
+## Requirements
 
 - Garmin Connect IQ SDK 3.1.0+
-- Klucz deweloperski (`developer_key.der`)
+- Developer key (`developer_key.der`)
 
-## Budowanie
+## Building
 
 ```bash
 # Widget
@@ -29,55 +29,59 @@ monkeyc -f sweetwatch-widget/monkey.jungle -o sweetwatch-widget.prg -d fenix6pro
 monkeyc -f sweetwatch-datafield/monkey.jungle -o sweetwatch-datafield.prg -d fenix6pro -y /path/to/developer_key.der -r
 ```
 
-## Instalacja na zegarku
+## Installation
 
-### Metoda 1: USB (najszybsza)
+### Method 1: USB (fastest)
 
-1. Podłącz zegarek przez USB
-2. Zegarek zamontuje się jako dysk (np. `/media/GARMIN` lub `D:\`)
-3. Skopiuj pliki `.prg` do odpowiednich folderów:
+1. Connect watch via USB
+2. Watch mounts as a drive (e.g., `/media/GARMIN` or `D:\`)
+3. Copy `.prg` files to:
    ```
    GARMIN/Apps/sweetwatch-widget.prg
    GARMIN/Apps/sweetwatch-datafield.prg
    ```
-4. Bezpiecznie odmontuj zegarek
-5. Zegarek automatycznie załaduje aplikacje
+4. Safely eject the watch
+5. Apps will load automatically
 
-### Metoda 2: Garmin Express
+### Method 2: Garmin Express
 
-1. Zbuduj plik `.iq` (package):
+1. Build `.iq` package:
    ```bash
    monkeyc -f monkey.jungle -o sweetwatch-widget.iq -e -y /path/to/developer_key.der
    ```
-2. Otwórz Garmin Express
-3. Wybierz zegarek > IQ Apps > Sideload
-4. Wybierz plik `.iq`
+2. Open Garmin Express
+3. Select watch > IQ Apps > Sideload
+4. Select the `.iq` file
 
-## Konfiguracja
+## Configuration
 
-Aplikacje domyślnie łączą się z:
+Apps connect to:
 ```
 https://test.sweetwatch.app/api/glucose/current
 ```
 
-Aby zmienić URL, edytuj pliki:
+To change the URL, edit:
 - `sweetwatch-widget/source/SweetWatchView.mc`
 - `sweetwatch-datafield/source/BackgroundServiceDelegate.mc`
 
-## Używanie
+## Usage
 
 ### Widget
-1. Na zegarku: przytrzymaj UP > Widgets
-2. Dodaj "SweetWatch" do listy widgetów
-3. Przesuń w lewo/prawo na tarczy żeby zobaczyć widget
+1. On watch: hold UP > Widgets
+2. Add "SweetWatch" to widget list
+3. Swipe left/right on watch face to see widget
 
 ### Data Field
-1. Na zegarku: przytrzymaj UP > Activities > [wybierz aktywność] > Settings > Data Screens
-2. Dodaj ekran lub edytuj istniejący
-3. Wybierz pole > Connect IQ > SweetWatch DF
+1. On watch: hold UP > Activities > [select activity] > Settings > Data Screens
+2. Add screen or edit existing
+3. Select field > Connect IQ > SweetWatch DF
 
-## Obsługiwane urządzenia
+## Supported Devices
 
-Obecnie: Fenix 6 Pro
+Currently: Fenix 6 Pro
 
-Aby dodać inne urządzenia, edytuj `<iq:products>` w `manifest.xml`.
+To add other devices, edit `<iq:products>` in `manifest.xml`.
+
+## License
+
+MIT
